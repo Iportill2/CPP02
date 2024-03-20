@@ -23,6 +23,7 @@ class Fixed
 		int		toInt(void) const;
 		int		getRawBits(void) const;
 		void	setRawBits(int const val);
+		void	endlprint(std::string s);
 };
 
 std::ostream & operator<<(std::ostream & o, Fixed const & rhs);
