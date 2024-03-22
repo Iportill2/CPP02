@@ -1,10 +1,9 @@
-NAME = BSP
+NAME = Now_we’re_talking
 
 
 SRCS = 	main.cpp \
-		Fixed.cpp \
-		bsp.cpp \
-		Point.cpp
+		Fixed.cpp 
+
 
 CC = c++
 RM = rm -f

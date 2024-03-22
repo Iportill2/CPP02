@@ -4,7 +4,7 @@
 Fixed::Fixed(void): _value(0)
 {
 	//_value = 0;
-	endlprint("Default constructor called with 0");
+	print("Default constructor called with 0");
 }
 
 /* 
@@ -17,7 +17,7 @@ Fixed::Fixed(void): _value(0)
 Fixed::Fixed(const int i)
 {
 	_value = i << _fract;
-	std::cout << "Int constructor called" << std::endl;
+	printf("Int constructor called");
 }
 
 /*
@@ -30,27 +30,27 @@ Fixed::Fixed(const int i)
 Fixed::Fixed(const float f)
 {
 	_value = static_cast<int>(roundf(f * (1 << _fract)));
-	endlprint("Float constructor called");
+	print("Float constructor called");
 
 }
 
 //Destructor
 Fixed::~Fixed(void)
 {
-	endlprint("Destructor called");
+	print("Destructor called");
 }
 
 //Copy constructor
 Fixed::Fixed(const Fixed &inst)
 {
-	endlprint("Copy constructor called");
+	print("Copy constructor called");
 	*this = inst;
 }
 
 //Assignation operator overload
 Fixed &	Fixed::operator=(Fixed const &inst)
 {
-	endlprint("Assigment operator called");
+	print("Assigment operator called");
 	_value = inst.getRawBits();
 	return (*this);
 }
@@ -82,11 +82,11 @@ void	Fixed::setRawBits(int const val)
 {
 	_value = val;
 }
-void	Fixed::endlprint(std::string s)
+void	Fixed::print(std::string s)
 {
 	std::cout << s << std::endl;
 }
-std::ostream & operator <<(std::ostream & os, Fixed const & fixed)
+std::ostream & operator<<(std::ostream & os, Fixed const & fixed)
 {
 	os << fixed.toFloat();
     return (os);

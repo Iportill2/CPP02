@@ -6,8 +6,10 @@ int	main()
 	Fixed b( a );
 	Fixed c;
 	
+	b.setRawBits(18);
 	c = b;
-
+	
+	
 	std::cout << a.getRawBits() << std::endl;
 	std::cout << b.getRawBits() << std::endl;
 	std::cout << c.getRawBits() << std::endl;
@@ -34,28 +36,4 @@ Destructor called
 Destructor called
 Destructor called
 $>
-7
-
-
-
-
-➜ /My_First_Class_in_Orthodox_Canonical_Form
-
-Default constructor called
-Copy constructor called
-Copy constructor called: Before: -472639896 After: //getRawBits member function called
-0//
-getRawBits member function called
-Default constructor called
-getRawBits member function called
-getRawBits member function called
-0
-getRawBits member function called
-0
-getRawBits member function called
-0
-Destructor called
-Destructor called
-Destructor called
-
 */

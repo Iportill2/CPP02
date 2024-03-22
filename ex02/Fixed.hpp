@@ -5,29 +5,54 @@
 class Fixed
 {
 	private:
-
-		int _value;
-		static const int bits = 8;
-
+		int 				_value;
+		static const int	_fract = 8;
 	public:
-		Fixed();
-		Fixed(const int parm);
-		~Fixed();
-		Fixed(const float nbr);
+				Fixed();
+				Fixed(float f);
+				Fixed(const int i);
+				~Fixed();
+		void 	print(std::string s);
+		float	toFloat()const;
+		int		toInt()const;
+		//void	setRawBits(int i);
+		//int		getRawBits();
+		/* static int min();
+		static int max(); */
+		int		getRawBits(void) const;
+		void	setRawBits(int const val);
+		bool 	operator>(const	Fixed inst);
+		bool 	operator<(const	Fixed inst);
+		bool 	operator>=(const	Fixed inst);
+		bool 	operator<=(const	Fixed inst);
+		bool 	operator==(const	Fixed inst);
+		bool 	operator!=(const	Fixed inst);
 
-		Fixed &	operator=(Fixed const &inst);
-		int getRawBits( void ) const;
-		void setRawBits( int const raw );
-		void endl_print(std::string s);
 
-		float toFloat( void ) const;
-		//that converts the fixed-point value to a floating-point value.
-		int toInt( void ) const;
-		//that converts the fixed-point value to an integer value
+
+
+		Fixed	operator +(const Fixed& inst2) const;
+		Fixed	operator -(const Fixed& inst2) const;
+		Fixed	operator *(const Fixed& inst2) const;
+		Fixed	operator /(const Fixed& inst2) const;
+
+		Fixed&	operator++();		// pre-increment
+		Fixed	operator++(int);	// post-increment
+		Fixed&	operator--();		// pre-decrement
+		Fixed	operator--(int);	// post-decrement
+
+		static const Fixed& min(Fixed& a, Fixed& b);
+		static const Fixed& max(Fixed& a, Fixed& b);
+		static const Fixed& min(const Fixed& a, const Fixed& b);
+		static const Fixed& max(const Fixed& a, const Fixed& b); 
 		/*
-		And add the following function to the Fixed class files:
-		•An overload of the insertion («) operator that inserts a floating-point representation
-		of the fixed-point number into the output stream object passed as parameter.
+		//arithmetic operators
+
+		//increment / decrement operators
+
+		// max/min overloaded methods
 		*/
 };
+std::ostream & operator<<(std::ostream & os, Fixed const & fixed);
 #endif
+

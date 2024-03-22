@@ -17,13 +17,13 @@ class Fixed
 		~Fixed(void);
 		
 		Fixed	(const Fixed &copy);
-		Fixed &	operator=(Fixed const &inst2);
+		Fixed &	operator=(Fixed const &inst);
 		
 		float	toFloat(void) const;
 		int		toInt(void) const;
 		int		getRawBits(void) const;
 		void	setRawBits(int const val);
-		void	endlprint(std::string s);
+		void	print(std::string s);
 };
 
 std::ostream & operator<<(std::ostream & o, Fixed const & rhs);
