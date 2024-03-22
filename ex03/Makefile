@@ -1,8 +1,10 @@
-NAME = My_First_Class_in_Orthodox_Canonical_Form
+NAME = BSP
 
 
 SRCS = 	main.cpp \
-		Fixed.cpp 
+		Fixed.cpp \
+		Point.cpp \
+		bsp.cpp
 
 CC = c++
 RM = rm -f

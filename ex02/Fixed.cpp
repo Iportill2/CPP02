@@ -1,13 +1,13 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed()
+Fixed::Fixed() //: _value(0)
 {
 	_value =0;
-	print("default constructor");
+	//print("Default Constructor");
 }
-Fixed::Fixed(float f)
+Fixed::Fixed(float f) : _value(static_cast<int>(roundf(f*(1 << _fract))))
 {
-	_value = static_cast<int>(roundf(f*(1 << _fract)));
+	//_value = static_cast<int>(roundf(f*(1 << _fract)));
 }
 Fixed::Fixed(const int i)
 {
@@ -15,7 +15,7 @@ Fixed::Fixed(const int i)
 }
 Fixed::~Fixed()
 {
-
+	//print("Default Destructor");
 }
 void Fixed::print(std::string s)
 {
@@ -36,110 +36,102 @@ std::ostream & operator<<(std::ostream & os, Fixed const & fixed)
 }
 int		Fixed::getRawBits(void) const
 {
-	return (this->_value);
+	return (/* this-> */_value);
 }
 
 void	Fixed::setRawBits(int const val)
 {
-	this->_value = val;
+	/* this-> */_value = val;
 }
-/* void Fixed::setRawBits(int i)
-{
-	_value=i;
-}
-int	Fixed::getRawBits()
-{
-	return(_value);
-} */
 
 bool	Fixed::operator>(const	Fixed inst)
 {
-	if(this->_value > inst._value)
+	if(/* this-> */_value > inst._value)
 		return(1);//TRUE
 	else
 		return (0);//FALSE
 }
 bool	Fixed::operator<(const	Fixed inst)
 {
-	if(this->_value < inst._value)
+	if(/* this-> */_value < inst._value)
 		return(1);//TRUE
 	else
 		return (0);//FALSE
 }
 bool	Fixed::operator>=(const	Fixed inst)
 {
-	if(this->_value >= inst._value)
+	if(/* this-> */_value >= inst._value)
 		return(1);//TRUE
 	else
 		return (0);//FALSE
 }
 bool	Fixed::operator<=(const	Fixed inst)
 {
-	if(this->_value <= inst._value)
+	if(/* this-> */_value <= inst._value)
 		return(1);//TRUE
 	else
 		return (0);//FALSE
 }
 bool	Fixed::operator==(const	Fixed inst)
 {
-	if(this->_value == inst._value)
+	if(/* this-> */_value == inst._value)
 		return(1);//TRUE
 	else
 		return (0);//FALSE
 }
 bool	Fixed::operator!=(const	Fixed inst)
 {
-	if(this->_value != inst._value)
+	if(/* this-> */_value != inst._value)
 		return(1);//TRUE
 	else
 		return (0);//FALSE
 }
 
-Fixed	Fixed::operator +(const Fixed& inst2) const
+Fixed	Fixed::operator +(const Fixed& inst) const
 {
 	Fixed	temp;
 
-	temp.setRawBits((this->getRawBits() + inst2.getRawBits()) / (1 << this->_fract));
+	temp.setRawBits((/* this-> */getRawBits() + inst.getRawBits()) / (1 << /* this-> */_fract));
 	return (temp);
 }
-Fixed	Fixed::operator -(const Fixed& inst2) const
+Fixed	Fixed::operator -(const Fixed& inst) const
 {
 	Fixed	temp;
 
-	temp.setRawBits((this->getRawBits() - inst2.getRawBits()) / (1 << this->_fract));
+	temp.setRawBits((/* this-> */getRawBits() - inst.getRawBits()) / (1 << /* this-> */_fract));
 	return (temp);
 }
-Fixed	Fixed::operator *(const Fixed& inst2) const
+Fixed	Fixed::operator *(const Fixed& inst) const
 {
 	Fixed	temp;
 
-	temp.setRawBits((this->getRawBits() * inst2.getRawBits()) / (1 << this->_fract));
+	temp.setRawBits((/* this-> */getRawBits() * inst.getRawBits()) / (1 << /* this-> */_fract));
 	return (temp);
 }
-Fixed	Fixed::operator /(const Fixed& inst2) const
+Fixed	Fixed::operator /(const Fixed& inst) const
 {
-	if (inst2._value == 0)
+	if (inst._value == 0)
 		std::cout << "Zero division error" << std::endl;
 	Fixed	temp;
 
-	temp.setRawBits((this->getRawBits() / inst2.getRawBits()) / (1 << this->_fract));
+	temp.setRawBits((/* this-> */getRawBits() / inst.getRawBits()) / (1 << /* this-> */_fract));
 	return (temp);
 }
 Fixed &	Fixed::operator ++()		// pre-increment
 {
-	++this->_value;
+	++/* this-> */_value;
 	return (*this);
 }
 Fixed	Fixed::operator ++(int)
 {
 	Fixed	tmp(*this);				//post-increment
 	
-	++this->_value;
+	++/* this-> */_value;
 	return (tmp);
 }
 Fixed  & Fixed::operator--()
 {
-	--this->_value;
+	--/* this-> */_value;
 	return(*this);
 
 }
@@ -147,7 +139,7 @@ Fixed	Fixed::operator--(int)
 {
 	Fixed	tmp(*this);
 
-	--this->_value;
+	--/* this-> */_value;
 	return(tmp);
 }
 const Fixed& Fixed::min(Fixed& a, Fixed& b)

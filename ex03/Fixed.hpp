@@ -1,33 +1,50 @@
-#ifndef FIXED_HPP
+#ifndef	FIXED_HPP
 # define FIXED_HPP
-# include <iostream>
-# include <math.h>
+
+#include <iostream>
+#include <cmath>
+
 class Fixed
 {
 	private:
+        int fixed_point;
+        static const int fractional_bits = 8;
+    public:
+        Fixed(void);
+        Fixed(const int value);
+        Fixed(const float value);
+        Fixed(const Fixed& other);
+        Fixed &operator=(Fixed const &other);
+        ~Fixed(void);
+        int getRawBits( void ) const;
+        void setRawBits( int const raw );
+        float toFloat( void ) const;
+        int toInt( void ) const;
+        
+        bool operator>(const Fixed& fixed) const;
+        bool operator<(const Fixed& fixed) const;
+        bool operator>=(const Fixed& fixed) const;
+        bool operator<=(const Fixed& fixed) const;
+        bool operator==(const Fixed& fixed) const;
+        bool operator!=(const Fixed& fixed) const;
 
-		int _value;
-		static const int bits = 8;
+        float operator+(const Fixed& fixed);
+        float operator-(const Fixed& fixed);
+        float operator*(const Fixed& fixed);
+        float operator/(const Fixed& fixed);
 
-	public:
-		Fixed();
-		Fixed(const int parm);
-		~Fixed();
-		Fixed(const float nbr);
+        Fixed operator++(int);
+        Fixed operator--(int);
+        Fixed &operator++();
+        Fixed &operator--();
 
-		Fixed &	operator=(Fixed const &inst);
-		int getRawBits( void ) const;
-		void setRawBits( int const raw );
-		void endl_print(std::string s);
-
-		float toFloat( void ) const;
-		//that converts the fixed-point value to a floating-point value.
-		int toInt( void ) const;
-		//that converts the fixed-point value to an integer value
-		/*
-		And add the following function to the Fixed class files:
-		•An overload of the insertion («) operator that inserts a floating-point representation
-		of the fixed-point number into the output stream object passed as parameter.
-		*/
+        static Fixed& min(Fixed& num1, Fixed& num2);
+        static const Fixed& min(const Fixed& num1, const Fixed& num2);
+        static Fixed& max(Fixed& num1, Fixed& num2);
+        static const Fixed& max(const Fixed& num1, const Fixed& num2);
 };
+
+std::ostream & operator<<(std::ostream & o, Fixed const & rhs);
+
 #endif
+
