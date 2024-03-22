@@ -43,50 +43,6 @@ void	Fixed::setRawBits(int const val)
 {
 	/* this-> */_value = val;
 }
-
-bool	Fixed::operator>(const	Fixed inst)
-{
-	if(/* this-> */_value > inst._value)
-		return(1);//TRUE
-	else
-		return (0);//FALSE
-}
-bool	Fixed::operator<(const	Fixed inst)
-{
-	if(/* this-> */_value < inst._value)
-		return(1);//TRUE
-	else
-		return (0);//FALSE
-}
-bool	Fixed::operator>=(const	Fixed inst)
-{
-	if(/* this-> */_value >= inst._value)
-		return(1);//TRUE
-	else
-		return (0);//FALSE
-}
-bool	Fixed::operator<=(const	Fixed inst)
-{
-	if(/* this-> */_value <= inst._value)
-		return(1);//TRUE
-	else
-		return (0);//FALSE
-}
-bool	Fixed::operator==(const	Fixed inst)
-{
-	if(/* this-> */_value == inst._value)
-		return(1);//TRUE
-	else
-		return (0);//FALSE
-}
-bool	Fixed::operator!=(const	Fixed inst)
-{
-	if(/* this-> */_value != inst._value)
-		return(1);//TRUE
-	else
-		return (0);//FALSE
-}
-
 Fixed	Fixed::operator +(const Fixed& inst) const
 {
 	Fixed	temp;
@@ -117,61 +73,4 @@ Fixed	Fixed::operator /(const Fixed& inst) const
 	temp.setRawBits((/* this-> */getRawBits() / inst.getRawBits()) / (1 << /* this-> */_fract));
 	return (temp);
 }
-Fixed &	Fixed::operator ++()		// pre-increment
-{
-	++/* this-> */_value;
-	return (*this);
-}
-Fixed	Fixed::operator ++(int)
-{
-	Fixed	tmp(*this);				//post-increment
-	
-	++/* this-> */_value;
-	return (tmp);
-}
-Fixed  & Fixed::operator--()
-{
-	--/* this-> */_value;
-	return(*this);
 
-}
-Fixed	Fixed::operator--(int)
-{
-	Fixed	tmp(*this);
-
-	--/* this-> */_value;
-	return(tmp);
-}
-const Fixed& Fixed::min(Fixed& a, Fixed& b)
-{
-    if( a.getRawBits() < b.getRawBits())
-        return a;
-    else
-        return b;
-	//return (a.getRawBits() < b.getRawBits() ? a : b);
-}
-const Fixed& Fixed::max(Fixed& a, Fixed& b)
-{
-    if(a.getRawBits() > b.getRawBits())
-        return a;
-    else
-        return b;
-	//return (a.getRawBits() > b.getRawBits() ? a : b);
-}
-const Fixed& Fixed::min(const Fixed& a, const Fixed& b)
-{
-    if( a.getRawBits() < b.getRawBits())
-        return a;
-    else
-        return b;
-	//return (a.getRawBits() < b.getRawBits() ? a : b);
-}
-
-const Fixed& Fixed::max(const Fixed& a, const Fixed& b)
-{
-    if(a.getRawBits() > b.getRawBits())
-        return a;
-    else
-        return b;
-	//return (a.getRawBits() > b.getRawBits() ? a : b);
-} 
