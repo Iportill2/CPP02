@@ -14,6 +14,7 @@ float calculate_the_area(Punto A, Punto B, Punto C)
 bool is_a_triangle(Punto A, Punto B, Punto C) 
 {
     float area = calculate_the_area(A, B, C);
+    std::cout << area << std::endl;
     return area > 0.0;
 }
 
@@ -23,15 +24,18 @@ bool point_inside_the_triangle(Punto A, Punto B, Punto C, Punto D) //BSP
     float areaABD = calculate_the_area(A, B, D);
     float areaACD = calculate_the_area(A, C, D);
     float areaBCD = calculate_the_area(B, C, D);
-    return areaTotal == (areaABD + areaACD + areaBCD);
+    if(areaTotal == (areaABD + areaACD + areaBCD))
+        return (true);
+    else
+        return(false);
 }
 
 int main() 
 {
-    Punto A = {1.0, 1.0};
-    Punto B = {4.0, 1.0};
-    Punto C = {2.0, 4.0};
-    Punto D = {2.0, 2.0};
+    Punto A = {-2, 2};
+    Punto B = {0, 0};
+    Punto C = {-2, -2};
+    Punto D = {-1, 0};
 
     if (is_a_triangle(A, B, C)) 
     {
@@ -41,7 +45,7 @@ int main()
         std::cout << "Los puntos A, B, y C no forman un triangulo." << std::endl;
 
         
-    if (point_inside_the_triangle(A, B, C, D)) 
+    if (point_inside_the_triangle(A, B, C, D)) //BSP
     {
         std::cout << "El punto D esta dentro del triangulo ABC." << std::endl;
     } 
