@@ -9,11 +9,12 @@ class Fixed
 	private:
 		int					_value;
 		static const int	_fract = 8;
-			
 	public:
 		Fixed(void);
 		Fixed(const int i);
 		Fixed(const float f);
+		Fixed();
+		
 		~Fixed(void);
 		
 		Fixed	(const Fixed &copy);
@@ -23,7 +24,6 @@ class Fixed
 		int		toInt(void) const;
 		int		getRawBits(void) const;
 		void	setRawBits(int const val);
-		void	print(std::string s);
 };
 
 std::ostream & operator<<(std::ostream & o, Fixed const & rhs);
