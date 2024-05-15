@@ -1,32 +1,48 @@
-#ifndef	FIXED_HPP
+#ifndef FIXED_HPP
 # define FIXED_HPP
-
-#include <iostream>
-#include <cmath>
-
+# include <iostream>
+# include <math.h>
 class Fixed
 {
 	private:
-        int 				fixed_point;
-        static const int 	fractional_bits = 8;
-    public:
-        Fixed(void);
-        Fixed(const int value);
-        Fixed(const float value);
-        Fixed(const Fixed& other);
-        Fixed &operator=(Fixed const &other);
-        ~Fixed(void);
-        int getRawBits( void ) const;
-        void setRawBits( int const raw );
-        float toFloat( void ) const;
-        int toInt( void ) const;
-        
-        float operator+(const Fixed& fixed);
-        float operator-(const Fixed& fixed);
-        float operator*(const Fixed& fixed);
-        float operator/(const Fixed& fixed);
+		int 				_value;
+		static const int	_fract = 8;
+	public:
+	//CANONICAL
+				Fixed();
+				Fixed(float f);
+				Fixed(const int i);
+				Fixed(const Fixed &copy);
+	Fixed &		operator=(Fixed const &inst);
+				~Fixed();
+				
+		float	toFloat()const;
+		int		toInt()const;
+
+		int		getRawBits(void) const;
+		void	setRawBits(int const val);
+
+		bool 	operator>(const	Fixed inst);
+		bool 	operator<(const	Fixed inst);
+		bool 	operator>=(const	Fixed inst);
+		bool 	operator<=(const	Fixed inst);
+		bool 	operator==(const	Fixed inst);
+		bool 	operator!=(const	Fixed inst);
+
+		Fixed	operator +(const Fixed& inst) const;
+		Fixed	operator -(const Fixed& inst) const;
+		Fixed	operator *(const Fixed& inst) const;
+		Fixed	operator /(const Fixed& inst) const;
+
+		Fixed&	operator++();		// pre-increment
+		Fixed	operator++(int);	// post-increment
+		Fixed&	operator--();		// pre-decrement
+		Fixed	operator--(int);	// post-decrement
+
+		static Fixed& min(Fixed& a, Fixed& b);
+		static Fixed& max(Fixed& a, Fixed& b);
+		static const Fixed& min(const Fixed& a, const Fixed& b);
+		static const Fixed& max(const Fixed& a, const Fixed& b); 
 };
-
-std::ostream & operator<<(std::ostream & o, Fixed const & rhs);
-
+std::ostream & operator<<(std::ostream & os, Fixed const & fixed);
 #endif

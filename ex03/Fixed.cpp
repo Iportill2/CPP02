@@ -1,83 +1,197 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed(void)
+Fixed::Fixed() //: _value(0)
 {
-    fixed_point = 0;
-    //std::cout << "Default constructor called" << std::endl;
-};
+	_value =0;
 
-Fixed::Fixed(const Fixed& other)
+}
+Fixed::Fixed(float f) : _value(static_cast<int>(roundf(f*(1 << _fract))))
 {
-    //std::cout << "Copy constructor called" << std::endl;
-    *this = other;
-};
-
-Fixed &Fixed::operator=(Fixed const &other)
+	//_value = static_cast<int>(roundf(f*(1 << _fract)));
+}
+Fixed::Fixed(const int i)
 {
-    //std::cout << "Copy assignment operator called" << std::endl;
-    setRawBits(other.getRawBits());
-    return *this;
-};
-
-Fixed::~Fixed(void)
+	_value = i << _fract;
+}
+Fixed::Fixed(const Fixed &copy)
 {
-    //std::cout << "Destructor called" << std::endl;
-};
-
-int Fixed::getRawBits( void ) const
+	*this = copy;
+}
+Fixed& Fixed::operator=(Fixed const &inst)
 {
-    return (fixed_point);
-};
-
-void Fixed::setRawBits( int const raw )
+	_value = inst._value;
+	return (*this);
+}
+Fixed::~Fixed()
 {
-    fixed_point = raw;
-};
 
-Fixed::Fixed(const int value)
+}
+////////////////////////////////////////////////////////
+
+float Fixed::toFloat()const
 {
-    //std::cout << "Int constructor called " << this->fixed_point << std::endl;
-    setRawBits(value * (1<< fractional_bits));
-};
-
-Fixed::Fixed(const float value)
+	return(static_cast<float>(_value)/(1 << _fract));
+}
+int	Fixed::toInt()const
 {
-    //std::cout << "Float constructor called: " << this->fixed_point << std::endl;
-    setRawBits(roundf(value * (1<< fractional_bits)));
-};
+	return(_value >> _fract);
+}
+////////////////////////////////////////////////
 
-float Fixed::toFloat( void ) const
+int		Fixed::getRawBits(void) const
 {
-    return (roundf(getRawBits()) / (1<< fractional_bits));
-};
-
-int Fixed::toInt( void ) const
-{
-    return (fixed_point / (1<< fractional_bits));
-};
-
-float    Fixed::operator+(const Fixed& fixed){
-    return (/* this-> */toFloat() + fixed.toFloat());
-};
-
-float    Fixed::operator-(const Fixed& fixed){
-    return (/* this-> */toFloat() - fixed.toFloat());
-};
-
-float    Fixed::operator*(const Fixed& fixed){
-    return (/* this-> */toFloat() * fixed.toFloat());
-};
-
-float    Fixed::operator/(const Fixed& fixed){
-    if (fixed.fixed_point == 0)
-        std::cout << "Division by 0 is not allowed" << std::endl;
-    return (/* this-> */toFloat() / fixed.toFloat());
-};
-
-//insertion operator overload
-std::ostream & operator <<(std::ostream & os, Fixed const & fixed)
-{
-	os << fixed.toFloat();
-    return (os);
+	return (this-> _value);
 }
 
+void	Fixed::setRawBits(int const val)
+{
+	this-> _value = val;
+}
+////////////////////////////////////////////////
+
+bool 	Fixed::operator>(const	Fixed inst)
+{
+	if(this->_value > inst._value)
+		return(true);
+	else
+		return(false);
+}
+bool 	Fixed::operator<(const	Fixed inst)
+{
+	if(this->_value < inst._value)
+		return(true);
+	else
+		return(false);
+}
+bool 	Fixed::operator>=(const	Fixed inst)
+{
+	if(this->_value >= inst._value)
+		return(true);
+	else
+		return(false);
+}
+bool 	Fixed::operator<=(const	Fixed inst)
+{
+	if(this->_value <= inst._value)
+		return(true);
+	else
+		return(false);
+}
+bool 	Fixed::operator==(const	Fixed inst)
+{
+	if(this->_value == inst._value)
+		return(true);
+	else
+		return(false);
+}
+bool 	Fixed::operator!=(const	Fixed inst)
+{
+	if(this->_value != inst._value)
+		return(true);
+	else
+		return(false);
+}
+////////////////////////////////////////////////
+Fixed	Fixed::operator +(const Fixed& inst) const
+{
+	Fixed	temp;
+
+	temp.setRawBits((/* this-> */getRawBits() + inst.getRawBits()) / (1 << /* this-> */_fract));
+	return (temp);
+}
+Fixed	Fixed::operator -(const Fixed& inst) const
+{
+	Fixed	temp;
+
+	temp.setRawBits((/* this-> */getRawBits() - inst.getRawBits()) / (1 << /* this-> */_fract));
+	return (temp);
+}
+Fixed	Fixed::operator *(const Fixed& inst) const
+{
+	Fixed	temp;
+
+	temp.setRawBits((/* this-> */getRawBits() * inst.getRawBits()) / (1 << /* this-> */_fract));
+	return (temp);
+}
+Fixed	Fixed::operator /(const Fixed& inst) const
+{
+	if (inst._value == 0)
+		std::cout << "Zero division error" << std::endl;
+	Fixed	temp;
+
+	temp.setRawBits((/* this-> */getRawBits() / inst.getRawBits()) / (1 << /* this-> */_fract));
+	return (temp);
+}
+/////////////////////////////////////////////////////////////////////////
+
+Fixed &	Fixed::operator ++()		// pre-increment
+{
+	++this->_value;
+	return (*this);
+}
+
+/* 
+	1 create a copy of the actual object (via copy constructor)
+	2 increments the value of the actual object
+	3 returns a the copy of object that hasn´t been incremented
+*/
+Fixed	Fixed::operator ++(int)
+{
+	Fixed	tmp(*this);				//post-increment
+	
+	++this->_value;
+	return (tmp);
+}
+
+Fixed &	Fixed::operator --()		// pre-decrement
+{
+	--this->_value;
+	return (*this);
+}
+
+Fixed	Fixed::operator --(int)
+{
+	Fixed	tmp(*this);				//post-decrement
+	
+	--this->_value;
+	return (tmp);
+}
+/////////////////////////////////////////////////////////////////////////
+
+Fixed& Fixed::min(Fixed& a, Fixed& b)
+{
+	if(a < b)
+		return(a);
+	else
+		return(b);
+
+}
+Fixed& Fixed::max(Fixed& a, Fixed& b)
+{
+	if(a > b)
+		return(a);
+	else
+		return(b);
+
+}
+const Fixed& Fixed::min(Fixed const& a, Fixed const& b)
+{
+	if(a._value < b._value)
+		return(a);
+	else
+		return(b);
+
+}
+const Fixed& Fixed::max(Fixed const& a, Fixed const& b)
+{
+	if(a._value > b._value)
+		return(a);
+	else
+		return(b);
+
+}
+std::ostream & operator<<(std::ostream & os, Fixed const & fixed)
+{
+	os << fixed.toFloat();
+	return(os);
+}

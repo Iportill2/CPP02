@@ -8,12 +8,14 @@ class Fixed
 		int 				_value;
 		static const int	_fract = 8;
 	public:
+	//CANONICAL
 				Fixed();
 				Fixed(float f);
 				Fixed(const int i);
+				Fixed(const Fixed &copy);
+	Fixed &		operator=(Fixed const &inst);
 				~Fixed();
 				
-		void 	print(std::string s);
 		float	toFloat()const;
 		int		toInt()const;
 

@@ -10,15 +10,15 @@ class Fixed
 		int					_value;
 		static const int	_fract = 8;
 	public:
+	//CANONICAL
 		Fixed(void);
 		Fixed(const int i);
 		Fixed(const float f);
 		Fixed();
-		
-		~Fixed(void);
-		
 		Fixed	(const Fixed &copy);
 		Fixed &	operator=(Fixed const &inst);
+		~Fixed(void);
+		
 		
 		float	toFloat(void) const;
 		int		toInt(void) const;

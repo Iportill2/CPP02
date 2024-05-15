@@ -5,7 +5,7 @@ Point::Point(void): x(0), y(0){}
 Point::Point(float const x, float const y): x(x), y(y) {};
 
 
-Point::Point(const Point& other): x(other.getPosX()), y(other.getPosY())
+Point::Point(const Point& other): x(other.getX()), y(other.getY())
 {}
 
 Point &Point::operator=(Point const &other)
@@ -20,10 +20,10 @@ Point::~Point(void)
     //std::cout << "Destructor called" << std::endl;
 };
 
-Fixed Point::getPosX(void) const {
+Fixed Point::getX(void) const {
     return x;
 }
 
-Fixed Point::getPosY(void) const {
+Fixed Point::getY(void) const {
     return y;
 }

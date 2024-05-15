@@ -7,7 +7,7 @@ class Fixed
 		int _value ;
 		static const int _bits = 8;
 	public:
-
+	//CANONICAL
 					Fixed();
 					Fixed	(const Fixed &copy);
 		Fixed &		operator=(Fixed const &inst);

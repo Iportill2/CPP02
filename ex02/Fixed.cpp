@@ -3,7 +3,7 @@
 Fixed::Fixed() //: _value(0)
 {
 	_value =0;
-	//print("Default Constructor");
+
 }
 Fixed::Fixed(float f) : _value(static_cast<int>(roundf(f*(1 << _fract))))
 {
@@ -13,16 +13,21 @@ Fixed::Fixed(const int i)
 {
 	_value = i << _fract;
 }
+Fixed::Fixed(const Fixed &copy)
+{
+	*this = copy;
+}
+Fixed& Fixed::operator=(Fixed const &inst)
+{
+	_value = inst._value;
+	return (*this);
+}
 Fixed::~Fixed()
 {
-	//print("Default Destructor");
+
 }
 ////////////////////////////////////////////////////////
 
-void Fixed::print(std::string s)
-{
-	std::cout << s << std::endl;
-}
 float Fixed::toFloat()const
 {
 	return(static_cast<float>(_value)/(1 << _fract));
@@ -35,12 +40,12 @@ int	Fixed::toInt()const
 
 int		Fixed::getRawBits(void) const
 {
-	return (/* this-> */_value);
+	return (this-> _value);
 }
 
 void	Fixed::setRawBits(int const val)
 {
-	/* this-> */_value = val;
+	this-> _value = val;
 }
 ////////////////////////////////////////////////
 
