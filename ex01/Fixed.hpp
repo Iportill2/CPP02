@@ -14,7 +14,6 @@ class Fixed
 		Fixed(void);
 		Fixed(const int i);
 		Fixed(const float f);
-		Fixed();
 		Fixed	(const Fixed &copy);
 		Fixed &	operator=(Fixed const &inst);
 		~Fixed(void);
