@@ -42,12 +42,12 @@ void owntest()
 
     std::cout << "c getRawBits:" << c.getRawBits() << std::endl;
     c.setRawBits(7);
-    std::cout << "c.setRawBits(7)" << std::endl;
+    std::cout << "c.setRawBits:" << std::endl;
     std::cout << "c getRawBits:" << c.getRawBits() << std::endl;
 
     a.setRawBits(8);
     b.setRawBits(2);
-    std::cout << "a.setRawBits(1) b.setRawBits(2);" << std::endl;
+    std::cout << "a.setRawBits(8) b.setRawBits(2);" << std::endl;
     std::cout << "a.getRawBits()=" << a.getRawBits() << std::endl <<  "b.getRawBits()=" << b.getRawBits() << std::endl;
     
     std::cout << "a._value:" << a.getRawBits() << std::endl;

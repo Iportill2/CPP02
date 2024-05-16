@@ -10,8 +10,11 @@ Point::Point(const Point& other): x(other.getX()), y(other.getY())
 
 Point &Point::operator=(Point const &other)
 {
-	(void)other;
+	
     //std::cout << "Copy assignment operator called" << std::endl;
+    Point temp;
+    temp = other;
+    this->x = temp.x;
     return *this;
 };
 

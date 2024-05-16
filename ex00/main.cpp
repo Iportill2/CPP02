@@ -6,8 +6,8 @@ int	main()
 	Fixed b( a );
 	Fixed c;
 	
-	//b.setRawBits(18);
 	c = b;
+	//b.setRawBits(18);
 	
 	
 	std::cout << a.getRawBits() << std::endl;

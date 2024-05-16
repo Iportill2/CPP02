@@ -17,7 +17,7 @@ Fixed::Fixed(void): _value(0)
 */
 Fixed::Fixed(const int i)
 {
-	_value = i << _fract;
+	this->_value = i << this->_fract;
 	std::cout << "Int constructor called" << std::endl;
 }
 
@@ -30,7 +30,7 @@ Fixed::Fixed(const int i)
 */
 Fixed::Fixed(const float f)
 {
-	_value = static_cast<int>(roundf(f * (1 << _fract)));
+	this->_value = static_cast<int>(roundf(f * (1 << _fract)));
 	std::cout << "Float constructor called" << std::endl;
 }
 
@@ -51,7 +51,7 @@ Fixed::Fixed(const Fixed &inst)
 Fixed &	Fixed::operator=(Fixed const &inst)
 {
 	std::cout << "operator= called" << std::endl;
-	_value = inst._value;
+	this->_value = inst._value;
 	return (*this);
 }
 
@@ -70,17 +70,17 @@ float	Fixed::toFloat(void) const
 */
 int		Fixed::toInt(void) const
 {
-	return (_value >> _fract);
+	return (this->_value >> this->_fract);
 }
 
 int		Fixed::getRawBits(void) const
 {
-	return (_value);
+	return (this->_value);
 }
 
 void	Fixed::setRawBits(int const val)
 {
-	_value = val;
+	this->_value = val;
 }
 std::ostream & operator<<(std::ostream & os, Fixed const & fixed)
 {

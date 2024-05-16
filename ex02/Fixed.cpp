@@ -2,7 +2,7 @@
 
 Fixed::Fixed() //: _value(0)
 {
-	_value =0;
+	this->_value =0;
 
 }
 Fixed::Fixed(float f) : _value(static_cast<int>(roundf(f*(1 << _fract))))
@@ -11,7 +11,7 @@ Fixed::Fixed(float f) : _value(static_cast<int>(roundf(f*(1 << _fract))))
 }
 Fixed::Fixed(const int i)
 {
-	_value = i << _fract;
+	this->_value = i << _fract;
 }
 Fixed::Fixed(const Fixed &copy)
 {
@@ -19,7 +19,7 @@ Fixed::Fixed(const Fixed &copy)
 }
 Fixed& Fixed::operator=(Fixed const &inst)
 {
-	_value = inst._value;
+	this->_value = inst._value;
 	return (*this);
 }
 Fixed::~Fixed()
@@ -30,11 +30,11 @@ Fixed::~Fixed()
 
 float Fixed::toFloat()const
 {
-	return(static_cast<float>(_value)/(1 << _fract));
+	return(static_cast<float>(this->_value)/(1 << this->_fract));
 }
 int	Fixed::toInt()const
 {
-	return(_value >> _fract);
+	return(this->_value >> this->_fract);
 }
 ////////////////////////////////////////////////
 
