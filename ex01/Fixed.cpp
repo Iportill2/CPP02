@@ -50,7 +50,7 @@ Fixed::Fixed(const Fixed &inst)
 //Assignation operator overload
 Fixed &	Fixed::operator=(Fixed const &inst)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
+	std::cout << "operator= called" << std::endl;
 	_value = inst._value;
 	return (*this);
 }
