@@ -1,11 +1,9 @@
 #include "Fixed.hpp"
 
 //Default constructor
-Fixed::Fixed(void): _value(0)
+Fixed::Fixed(void): _fixedPointValue(0)
 {
-	//_value = 0;
-	std::cout << "Default constructor called with 0" << std::endl;
-
+	std::cout << "Default constructor called" << std::endl;
 }
 
 /* 
@@ -17,7 +15,7 @@ Fixed::Fixed(void): _value(0)
 */
 Fixed::Fixed(const int i)
 {
-	this->_value = i << this->_fract;
+	this->_fixedPointValue = i << this->_fractionalBits;
 	std::cout << "Int constructor called" << std::endl;
 }
 
@@ -30,7 +28,7 @@ Fixed::Fixed(const int i)
 */
 Fixed::Fixed(const float f)
 {
-	this->_value = static_cast<int>(roundf(f * (1 << _fract)));
+	this->_fixedPointValue = static_cast<int>(roundf(f * (1 << _fractionalBits)));
 	std::cout << "Float constructor called" << std::endl;
 }
 
@@ -50,8 +48,9 @@ Fixed::Fixed(const Fixed &inst)
 //Assignation operator overload
 Fixed &	Fixed::operator=(Fixed const &inst)
 {
-	std::cout << "operator= called" << std::endl;
-	this->_value = inst._value;
+	std::cout << "Copy assignment operator called" << std::endl;
+	if (this != &inst)
+		this->_fixedPointValue = inst.getRawBits();
 	return (*this);
 }
 
@@ -61,26 +60,22 @@ Fixed &	Fixed::operator=(Fixed const &inst)
 */
 float	Fixed::toFloat(void) const
 {
-	return (static_cast<float>(_value) / (1 << _fract));
+	return (static_cast<float>(_fixedPointValue) / (1 << _fractionalBits));
 }
 
-/* 
-	opposite to what the int contructor does
-	converts the fixed to int (divides by 2^8)
-*/
 int		Fixed::toInt(void) const
 {
-	return (this->_value >> this->_fract);
+	return (this->_fixedPointValue >> this->_fractionalBits);
 }
 
 int		Fixed::getRawBits(void) const
 {
-	return (this->_value);
+	return (this->_fixedPointValue);
 }
 
 void	Fixed::setRawBits(int const val)
 {
-	this->_value = val;
+	this->_fixedPointValue = val;
 }
 std::ostream & operator<<(std::ostream & os, Fixed const & fixed)
 {

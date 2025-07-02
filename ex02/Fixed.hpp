@@ -5,8 +5,8 @@
 class Fixed
 {
 	private:
-		int 				_value;
-		static const int	_fract = 8;
+		int 				_fixedPointValue;
+		static const int	_fractionalBits = 8;
 	public:
 	//CANONICAL
 				Fixed();

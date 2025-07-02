@@ -10,7 +10,6 @@ class Point
         Point(void);
         Point(float const value1, float const value2);
         Point(const Point& other);
-        Point &operator=(Point const &other);
         ~Point(void);
 
         Fixed getX(void) const;
